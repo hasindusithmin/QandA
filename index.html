@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q&A</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://pagination.js.org/dist/2.1.5/pagination.js"></script>
+    <link rel="stylesheet" href="https://pagination.js.org/dist/2.1.5/pagination.css">
+    <style>
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Oswald"
+        }
+
+        body {
+            font-family: "Open Sans"
+        }
+    </style>
+</head>
+
+<body class="w3-light-grey">
+    <div class="w3-content" style="max-width:1600px">
+        <header class="w3-container w3-center w3-padding-48 w3-white">
+            <h1 class="w3-xxxlarge"><b>JANE BLOGLIFE</b></h1>
+            <h6>Welcome to the blog of <span class="w3-tag">Jane's world</span></h6>
+        </header>
+        <div class="w3-row w3-padding w3-border">
+            <div class="w3-col l8 s12">
+                <div class="w3-container w3-white w3-margin w3-padding-large">
+                    <div class="w3-center">
+                        <h3>TITLE HEADING</h3>
+                        <h5>Title description, <span class="w3-opacity">April 7, 2016</span></h5>
+                    </div>
+
+                    <div class="w3-justify">
+                        <img src="https://www.w3schools.com/w3images/runway.jpg" alt="Runway" style="width:100%" class="w3-padding-16">
+                        <p><strong>Dont miss!</strong> The runway in New York City this weekend is gonna be legendary!
+                        </p>
+                        <p>Some text about this blog entry. Fashion fashion and mauris neque quam, fermentum ut nisl
+                            vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor
+                            magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies
+                            mi non congue ullam corper. Praesent tincidunt sedtellus ut rutrum. Sed vitae justo
+                            condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+                        <p class="w3-clear"></p>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="w3-col l4">
+                <div class="w3-white w3-margin">
+                    <div class="w3-container w3-padding w3-black">
+                        <h4>Tags</h4>
+                    </div>
+                    <div class="w3-container w3-white">
+                        <p id="tags">
+                            <span class="w3-tag w3-light-grey w3-small w3-margin-bottom"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div id="root"></div>
+        <div id="demo"></div> -->
+    </div>
+    <script>
+        function handler(tag){
+            console.log(tag)
+        }
+        $.ajax({
+            beforeSend: function () {
+                $('#tags').text('Loading data from questionnaire.deta.dev ...')
+            },
+            type: 'GET',
+            url: `https://questionnaire.deta.dev/tags`,
+            success: function (data) {
+                $('#tags').text('')
+                let txt = ''
+                Object.keys(data).forEach(tag=>{
+                    txt += `<span class="w3-tag w3-light-grey w3-small w3-margin-bottom" onclick="handler('${tag}')">${tag.toUpperCase()}</span>&nbsp;`
+                })
+                $('#tags').html(txt)
+            },
+            error: function (xhr, status, error) {
+                $('#tags').text(error)
+            }
+        });
+        /*
+        $.ajax({
+            beforeSend: function () {
+                $('#root').text('Loading data from questionnaire.deta.dev ...')
+            },
+            type: 'GET',
+            url: `https://questionnaire.deta.dev/oop`,
+            success: function (data) {
+                $('#root').text('')
+                $('#demo').pagination({
+                    dataSource: data,
+                    pageSize: 5,
+                    pageRange: null,
+                    showPageNumbers: true,
+                    callback: function (data, pagination) {
+                        // template method of yourself
+                        console.log(data)
+                    }
+                })
+            },
+            error: function (xhr, status, error) {
+                $('#root').text(error)
+            }
+        });
+        */
+    </script>
+</body>
+
+</html>
